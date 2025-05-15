@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Hub | Student Login & Register</title>
+  <link rel="stylesheet" th:href="@{/css/output.css}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    .glass {
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      backdrop-filter: blur(8px);
+      border-radius: 1.5rem;
+    }
+
+    .icon {
+      background: linear-gradient(135deg, #4f8cff 0%, #a770ef 100%);
+      color: white;
+      border-radius: 9999px;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(79, 140, 255, 0.15);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+
+  <div class="flex items-center justify-center min-h-screen px-2">
+    <div class="glass w-full max-w-lg p-8 md:p-12">
+      <div class="flex flex-col items-center mb-6">
+        <span class="icon">
+          <svg class="h-10 w-10" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0 0H6m6 0h6" />
+          </svg>
+        </span>
+        <h1 class="text-2xl md:text-3xl font-bold text-blue-700 mb-1">Welcome to Study Hub</h1>
+        <p class="text-gray-600 text-center text-sm">A student platform to share notes & study material</p>
+      </div>
+
+      <!-- Toggle Tabs -->
+      <div class="flex justify-between mb-6" role="tablist">
+        <button id="login-tab" role="tab" aria-selected="true" tabindex="0"
+          class="w-1/2 py-2 text-center font-semibold text-blue-600 border-b-2 border-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+          Login
+        </button>
+        <button id="register-tab" role="tab" aria-selected="false" tabindex="-1"
+          class="w-1/2 py-2 text-center font-semibold text-gray-600 border-b-2 border-transparent hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+          Register
+        </button>
+      </div>
+
+      <!-- Error Message -->
+      <div id="form-error" class="mb-4 text-red-600 text-center hidden"></div>
+
+      <!-- Login Form -->
+      <form th:action="@{/login}" method="post" id="login-form" class="space-y-4" autocomplete="on" novalidate>
+        <div>
+          <label for="login-email" class="block text-gray-700">Email</label>
+          <input id="login-email" name="email" type="email" required autocomplete="username"
+            placeholder="you@example.com"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" aria-required="true" />
+        </div>
+        <div>
+          <label for="login-password" class="block text-gray-700">Password</label>
+          <div class="relative">
+            <input id="login-password" name="password" type="password" required autocomplete="current-password"
+              placeholder="••••••••"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500 pr-10"
+              aria-required="true" />
+            <button type="button" tabindex="-1"
+              class="absolute right-2 top-2 text-gray-400 hover:text-blue-600 focus:outline-none"
+              onclick="togglePassword('login-password', this)" aria-label="Show or hide password">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path id="login-eye" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-blue-600 to-purple-500 text-white py-2 rounded-lg hover:from-blue-700 hover:to-purple-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 font-semibold">
+          Login
+        </button>
+        <p class="text-sm text-center text-gray-500 mt-4">Don't have an account?
+          <button type="button" class="text-blue-600 hover:underline focus:outline-none" onclick="switchToRegister()">
+            Register
+          </button>
+        </p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="space-y-4 hidden" autocomplete="on" novalidate th:action="@{/register}"
+        method="post">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="register-name" class="block text-gray-700">Full Name</label>
+            <input id="register-name" name="name" type="text" required autocomplete="name" placeholder="Your Name"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" aria-required="true" />
+          </div>
+          <div>
+            <label for="register-email" class="block text-gray-700">Email</label>
+            <input id="register-email" name="email" type="email" required autocomplete="username"
+              placeholder="you@example.com"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" aria-required="true" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="register-password" class="block text-gray-700">Password</label>
+            <div class="relative">
+              <input id="register-password" name="password" type="password" required autocomplete="new-password"
+                placeholder="Create a password"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500 pr-10"
+                aria-required="true" />
+              <button type="button" tabindex="-1"
+                class="absolute right-2 top-2 text-gray-400 hover:text-blue-600 focus:outline-none"
+                onclick="togglePassword('register-password', this)" aria-label="Show or hide password">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path id="register-eye" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div>
+            <label for="register-confirm" class="block text-gray-700">Confirm Password</label>
+            <div class="relative">
+              <input id="register-confirm" name="confirm" type="password" required autocomplete="new-password"
+                placeholder="Repeat password"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500 pr-10"
+                aria-required="true" />
+              <button type="button" tabindex="-1"
+                class="absolute right-2 top-2 text-gray-400 hover:text-blue-600 focus:outline-none"
+                onclick="togglePassword('register-confirm', this)" aria-label="Show or hide password">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path id="register-confirm-eye" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="register-college" class="block text-gray-700">College / University</label>
+          <input id="register-college" name="institute" type="text" required placeholder="Your College/University"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" aria-required="true" />
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="register-course" class="block text-gray-700">Course</label>
+            <input id="register-course" name="course" type="text" required placeholder="e.g. B.Tech, B.Sc, etc."
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" aria-required="true" />
+          </div>
+        </div>
+        <button type="submit"
+          class="w-full bg-gradient-to-r from-blue-600 to-purple-500 text-white py-2 rounded-lg hover:from-blue-700 hover:to-purple-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 font-semibold">
+          Register
+        </button>
+        <p class="text-sm text-center text-gray-500 mt-4">Already have an account?
+          <button type="button" class="text-blue-600 hover:underline focus:outline-none" onclick="switchToLogin()">
+            Login
+          </button>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+
+  <script>
+    // Tab and form elements
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const loginTab = document.getElementById("login-tab");
+    const registerTab = document.getElementById("register-tab");
+    const formError = document.getElementById("form-error");
+
+    // Switch to Register Tab
+    function switchToRegister() {
+      loginForm.classList.add("hidden");
+      registerForm.classList.remove("hidden");
+      loginTab.classList.remove("text-blue-600", "border-blue-600");
+      loginTab.classList.add("text-gray-600", "border-transparent");
+      loginTab.setAttribute("aria-selected", "false");
+      loginTab.setAttribute("tabindex", "-1");
+      registerTab.classList.add("text-blue-600", "border-blue-600");
+      registerTab.classList.remove("text-gray-600", "border-transparent");
+      registerTab.setAttribute("aria-selected", "true");
+      registerTab.setAttribute("tabindex", "0");
+      formError.classList.add("hidden");
+      registerTab.focus();
+    }
+
+    // Switch to Login Tab
+    function switchToLogin() {
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+      registerTab.classList.remove("text-blue-600", "border-blue-600");
+      registerTab.classList.add("text-gray-600", "border-transparent");
+      registerTab.setAttribute("aria-selected", "false");
+      registerTab.setAttribute("tabindex", "-1");
+      loginTab.classList.add("text-blue-600", "border-blue-600");
+      loginTab.classList.remove("text-gray-600", "border-transparent");
+      loginTab.setAttribute("aria-selected", "true");
+      loginTab.setAttribute("tabindex", "0");
+      formError.classList.add("hidden");
+      loginTab.focus();
+    }
+
+    // Keyboard navigation for tabs
+    loginTab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        switchToRegister();
+      }
+    });
+    registerTab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        switchToLogin();
+      }
+    });
+
+    loginTab.addEventListener("click", switchToLogin);
+    registerTab.addEventListener("click", switchToRegister);
+
+    // Password visibility toggle
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === "password") {
+        input.type = "text";
+        btn.querySelector("svg path").setAttribute("d", "M13.875 18.825A10.05 10.05 0 0112 19c-5 0-9-4-9-7s4-7 9-7c1.657 0 3.216.417 4.563 1.125M19.07 4.93l-14.14 14.14M15 12a3 3 0 11-6 0 3 3 0 016 0z");
+      } else {
+        input.type = "password";
+        btn.querySelector("svg path").setAttribute("d", "M15 12a3 3 0 11-6 0 3 3 0 016 0zm6 0a9 9 0 11-18 0 9 9 0 0118 0z");
+      }
+    }
+
+    // Form validation helpers
+    function showError(message) {
+      formError.textContent = message;
+      formError.classList.remove("hidden");
+    }
+    function clearError() {
+      formError.textContent = "";
+      formError.classList.add("hidden");
+    }
+
+
+    // Email validation
+    function validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    const menuToggle = document.getElementById('menu-toggle')
+    const mobileMenu = document.getElementById('mobile-menu')
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden')
+    })
+
+  </script>
+</body>
+<script th:src="@{/js/app.js}"></script>
+
+</html>

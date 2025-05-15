@@ -1,0 +1,52 @@
+<header class="sticky top-0 bg-white/80 backdrop-blur-md border-b border-gray-300 z-50">
+    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+        <a href="/" class="flex items-center gap-2">
+            <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <span class="text-xl font-bold text-gray-800">StudyHub</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+            <a href="/study-material" class="text-gray-600 hover:text-blue-600 transition-colors">Materials</a>
+            <a href="/discussion" class="text-gray-600 hover:text-blue-600 transition-colors">Discussion</a>
+            <a href="/help" class="text-gray-600 hover:text-blue-600 transition-colors">Help</a>
+            <a th:if="${session.currentUser != null}" href="/upload-material"
+                class="text-gray-600 hover:text-blue-600 transition-colors">Upload Material</a>
+            <a th:if="${session.currentUser != null}" href="/profile"
+                class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+        </div>
+
+        <div class="flex items-center">
+            <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg" id="menu-toggle" aria-label="Toggle Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+
+            <a th:if="${session.currentUser == null}" class="ml-4 bg-gray-600 rounded-2xl text-white" href="/login">
+                <button class="px-5 py-2 rounded-lg transition-colors">
+                    Join
+                </button>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white/80 backdrop-blur-md border-b">
+        <div class="flex flex-col px-6 py-4 gap-4">
+            <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+            <a href="/study-material" class="text-gray-600 hover:text-blue-600 transition-colors">Materials</a>
+            <a href="/discussion" class="text-gray-600 hover:text-blue-600 transition-colors">Discussion</a>
+            <a href="/help" class="text-gray-600 hover:text-blue-600 transition-colors">Help</a>
+            <a th:if="${session.currentUser != null}" href="/upload-material"
+                class="text-gray-600 hover:text-blue-600 transition-colors">Upload Material</a>
+            <a th:if="${session.currentUser != null}" href="/profile"
+                class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+            <a th:if="${session.currentUser == null}" href="/login"
+                class="text-gray-600 hover:text-blue-600 transition-colors">Join</a>
+        </div>
+    </div>
+</header>

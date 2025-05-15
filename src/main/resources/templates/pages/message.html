@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pre-Portal - Message</title>
+  <link rel="stylesheet" th:href="@{/css/output.css}" />
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <!-- Success Message -->
+  <div th:if="${session.success != null}"
+    class="bg-white max-w-lg w-full rounded-xl shadow-lg p-8 flex flex-col items-center text-center border-green-200">
+    <svg class="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M9 12l2 2l4 -4m5 2a9 9 0 11-18 0a9 9 0 0118 0z" />
+    </svg>
+    <h2 class="text-2xl font-bold text-green-700 mb-2">Success</h2>
+    <p class="text-gray-700 mb-4" th:text="${session.success}">Operation was successful.</p>
+    <a th:href="${session.redirectUrl}" href="/profile"
+      class="mt-2 inline-block bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+      Continue
+    </a>
+  </div>
+
+  <!-- Error Message -->
+  <div th:if="${session.error != null}"
+    class="bg-white max-w-lg w-full rounded-xl shadow-lg p-8 flex flex-col items-center text-center  border-red-200">
+    <svg class="w-16 h-16 text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 9v2m0 4h.01M12 5a7 7 0 100 14a7 7 0 000-14z" />
+    </svg>
+    <h2 class="text-2xl font-bold text-red-700 mb-2">Error</h2>
+    <p class="text-gray-700 mb-4" th:text="${session.error}">Something went wrong.</p>
+    <a th:href="${session.redirectUrl}" href="/join"
+      class="mt-2 inline-block bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+      Go Back
+    </a>
+  </div>
+
+</body>
+
+</html>

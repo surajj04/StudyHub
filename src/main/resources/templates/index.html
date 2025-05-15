@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Hub</title>
+  <link rel="stylesheet" th:href="@{/css/output.css}" />
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-entry {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <!-- Hero Section -->
+  <section class="animate-entry">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+      <div class="bg-gray-600 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl  text-center sm:text-left">
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6 leading-tight">Unlock Your Learning Potential</h1>
+          <p class="text-base sm:text-xl mb-6 sm:mb-8">Access curated study resources, collaborate with peers, and
+            accelerate your academic success.</p>
+
+          <!-- Responsive Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 sm:justify-start items-center">
+            <button
+              class="bg-white text-blue-600 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-opacity-90 transition-all w-full sm:w-auto">
+              Start Learning Now →
+            </button>
+            <button
+              class="border-2 border-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg hover:bg-white hover:text-blue-600 transition-all w-full sm:w-auto">
+              How It Works
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Popular Categories -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-12">Popular Categories</h2>
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="bg-blue-600 text-white p-6 rounded-xl text-center hover-scale">
+        <div class="text-4xl mb-4">🧮</div>
+        <h3 class="text-xl font-semibold mb-2">Mathematics</h3>
+        <p class="text-blue-100">1200+ Resources</p>
+      </div>
+
+      <div class="bg-green-600 text-white p-6 rounded-xl text-center hover-scale">
+        <div class="text-4xl mb-4">🔬</div>
+        <h3 class="text-xl font-semibold mb-2">Science</h3>
+        <p class="text-green-100">850+ Resources</p>
+      </div>
+
+      <div class="bg-purple-600 text-white p-6 rounded-xl text-center hover-scale">
+        <div class="text-4xl mb-4">💻</div>
+        <h3 class="text-xl font-semibold mb-2">Programming</h3>
+        <p class="text-purple-100">600+ Resources</p>
+      </div>
+
+      <div class="bg-orange-600 text-white p-6 rounded-xl text-center hover-scale">
+        <div class="text-4xl mb-4">🎨</div>
+        <h3 class="text-xl font-semibold mb-2">History & Arts</h3>
+        <p class="text-orange-100">450+ Resources</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Resources -->
+  <section class="animate-entry max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-12">Featured Study Materials</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Mathematics Card -->
+      <div class="bg-white hover-scale rounded-xl shadow-lg overflow-hidden">
+        <div class="p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+              📘
+            </div>
+            <h3 class="text-xl font-semibold">Mathematics Mastery</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Comprehensive guides from algebra to calculus</p>
+          <div class="flex items-center justify-between">
+            <button class="text-blue-600 hover:text-blue-700 flex items-center gap-2">
+              Download Now
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM13.293 8.707a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L14 11.414V16a1 1 0 11-2 0v-4.586l-1.293 1.293a1 1 0 01-1.414-1.414l3-3z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+            <span class="text-sm text-gray-500">PDF • 2.4MB</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Physics Card -->
+      <div class="bg-white hover-scale rounded-xl shadow-lg overflow-hidden">
+        <div class="p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+              🔭
+            </div>
+            <h3 class="text-xl font-semibold">Physics Essentials</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Master classical mechanics and thermodynamics</p>
+          <div class="flex items-center justify-between">
+            <button class="text-red-600 hover:text-red-700 flex items-center gap-2">
+              Watch Videos
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+            <span class="text-sm text-gray-500">15 Videos</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Programming Card -->
+      <div class="bg-white hover-scale rounded-xl shadow-lg overflow-hidden">
+        <div class="p-6">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+              💻
+            </div>
+            <h3 class="text-xl font-semibold">Programming Basics</h3>
+          </div>
+          <p class="text-gray-600 mb-4">Learn Python fundamentals and algorithms</p>
+          <div class="flex items-center justify-between">
+            <button class="text-green-600 hover:text-green-700 flex items-center gap-2">
+              Get eBook
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd"
+                  d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                  clip-rule="evenodd" />
+              </svg>
+            </button>
+            <span class="text-sm text-gray-500">ePub • 5.1MB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-gray-50 p-8 min-h-[350px] flex items-center justify-center">
+    <div
+      class="bg-white [box-shadow:0_4px_24px_-8px_rgba(0,0,0,0.2)] grid lg:grid-cols-4 sm:grid-cols-2 sm:gap-24 gap-12 rounded-3xl px-20 py-10">
+
+      <div class="text-center">
+        <h3 class="text-slate-900 text-4xl font-extrabold">12<span class="text-blue-600">K+</span></h3>
+        <p class="text-slate-500 text-base font-semibold mt-3">Registered Students</p>
+        <p class="text-slate-400 text-xs mt-1">Across 50+ colleges</p>
+      </div>
+
+      <div class="text-center">
+        <h3 class="text-slate-900 text-4xl font-extrabold">4.2<span class="text-blue-600">K+</span></h3>
+        <p class="text-slate-500 text-base font-semibold mt-3">Study Materials Uploaded</p>
+        <p class="text-slate-400 text-xs mt-1">Notes, books, and videos</p>
+      </div>
+
+      <div class="text-center">
+        <h3 class="text-slate-900 text-4xl font-extrabold">22<span class="text-blue-600">K</span></h3>
+        <p class="text-slate-500 text-base font-semibold mt-3">Downloads</p>
+        <p class="text-slate-400 text-xs mt-1">Total files downloaded</p>
+      </div>
+
+      <div class="text-center">
+        <h3 class="text-slate-900 text-4xl font-extrabold">99.9<span class="text-blue-600">%</span></h3>
+        <p class="text-slate-500 text-base font-semibold mt-3">Uptime</p>
+        <p class="text-slate-400 text-xs mt-1">Fast and reliable access</p>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- Latest Uploads -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-12">Latest Uploads</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+            🧪
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">Advanced Chemistry</h3>
+            <p class="text-sm text-gray-500">Uploaded 2 hours ago</p>
+          </div>
+        </div>
+        <p class="text-gray-600 mb-4">Complete guide to organic chemistry reactions and mechanisms</p>
+        <button class="text-yellow-600 hover:text-yellow-700 flex items-center gap-2">
+          View Material →
+        </button>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
+            📜
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold">World History</h3>
+            <p class="text-sm text-gray-500">Uploaded 5 hours ago</p>
+          </div>
+        </div>
+        <p class="text-gray-600 mb-4">Comprehensive timeline of major historical events</p>
+        <button class="text-pink-600 hover:text-pink-700 flex items-center gap-2">
+          View Material →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-12">What Students Say</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white p-8 rounded-xl shadow-md hover-scale">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-14 h-14 rounded-full"
+            alt="Sarah Johnson">
+          <div>
+            <div class="font-semibold">Sarah Johnson</div>
+            <div class="text-sm text-gray-500">Computer Science Student</div>
+          </div>
+        </div>
+        <p class="text-gray-600">This platform transformed how I study. The quality of resources helped me ace my exams!
+        </p>
+        <div class="mt-4 flex gap-1 text-yellow-400">
+          ★★★★★
+        </div>
+      </div>
+
+      <div class="bg-white p-8 rounded-xl shadow-md hover-scale">
+        <div class="flex items-center gap-4 mb-4">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-14 h-14 rounded-full" alt="Mike Chen">
+          <div>
+            <div class="font-semibold">Mike Chen</div>
+            <div class="text-sm text-gray-500">Engineering Student</div>
+          </div>
+        </div>
+        <p class="text-gray-600">The best collection of study materials I've found online. Highly recommended!</p>
+        <div class="mt-4 flex gap-1 text-yellow-400">
+          ★★★★★
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+<script th:src="@{/js/app.js}"></script>
+
+</html>

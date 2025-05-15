@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Study Hub | Help & Support</title>
+  <link rel="stylesheet" th:href="@{/css/output.css}" />
+</head>
+
+<body class="bg-gray-50 ">
+
+  <!-- Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+
+  <!-- Main -->
+  <main class="max-w-5xl mx-auto px-4 py-10">
+    <!-- Title -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Need Help? We’re Here to Assist You</h2>
+      <p class="text-gray-600 mt-2">Browse FAQs or get in touch with our support team for assistance.</p>
+    </div>
+
+    <!-- FAQs Section -->
+    <section class="bg-white p-6 rounded-xl shadow-lg mb-10">
+      <h3 class="text-xl font-semibold mb-6 text-gray-800">Frequently Asked Questions</h3>
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="border-b border-gray-300  pb-4">
+          <h4 class="text-lg font-semibold text-gray-800">How can I access study materials?</h4>
+          <p class="text-sm text-gray-600 mt-2">To access study materials, simply navigate to the 'Materials' section
+            from the menu and explore the available resources in various subjects.</p>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border-b border-gray-300  pb-4">
+          <h4 class="text-lg font-semibold text-gray-800">How do I submit a request for new content?</h4>
+          <p class="text-sm text-gray-600 mt-2">To request new content, you can use the 'Submit Request' feature found
+            in the Materials section or contact our support team directly.</p>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border-b border-gray-300  pb-4">
+          <h4 class="text-lg font-semibold text-gray-800">Can I share study materials with others?</h4>
+          <p class="text-sm text-gray-600 mt-2">Yes, you can share study materials with others via the sharing options
+            available on each resource page. Simply click on the 'Share' button.</p>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="border-b border-gray-300  pb-4">
+          <h4 class="text-lg font-semibold text-gray-800">How do I participate in discussions?</h4>
+          <p class="text-sm text-gray-600 mt-2">To participate in discussions, go to the 'Discussion' section, select a
+            topic, and click on 'Reply' to join the conversation or start a new thread.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Submit Support Query Section -->
+    <section class="bg-white p-6 rounded-xl shadow-lg">
+      <h3 class="text-xl font-semibold mb-6 text-gray-800">Submit a Support Request</h3>
+      <form class="space-y-4">
+        <input type="text" placeholder="Your Name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" />
+        <input type="email" placeholder="Your Email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500" />
+        <textarea rows="4" placeholder="Describe your issue or query"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-blue-500"></textarea>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors">Submit
+          Request</button>
+      </form>
+    </section>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+
+</body>
+<script th:src="@{/js/app.js}"></script>
+
+</html>

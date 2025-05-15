@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Access free study materials, notes, PDFs, and resources across various subjects at StudyHub. Join our learning community today.">
+  <meta property="og:title" content="Study Materials | StudyHub">
+  <meta property="og:description"
+    content="Explore thousands of free educational resources on StudyHub. Download notes, books, and video tutorials.">
+  <title>StudyHub | Study Materials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-entry {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+</head>
+
+<body class="font-['Inter'] bg-gray-50 text-gray-800">
+  <!-- Header -->
+  <header class="sticky top-0 bg-white/80 backdrop-blur-md border-b z-50">
+    <nav class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto">
+      <a href="/" class="flex items-center gap-2">
+        <svg class="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <span class="text-xl font-bold text-gray-800">StudyHub</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+        <a href="/pages/matrial.html" class="text-gray-600 hover:text-blue-600 transition-colors">Materials</a>
+        <a href="/pages/descussion.html" class="text-gray-600 hover:text-blue-600 transition-colors">Discussion</a>
+        <a href="/pages/help.html" class="text-gray-600 hover:text-blue-600 transition-colors">Help</a>
+        <a href="/pages/uploadMaterial.html" class="text-gray-600 hover:text-blue-600 transition-colors">Upload
+          Material</a>
+        <a href="/pages/profile.html" class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
+      </div>
+
+      <div class="flex items-center">
+        <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg" id="menu-toggle">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+        <a class="bg-gray-600 rounded-2xl text-white" href="/pages/login.html">
+          <button class=" px-5 py-2 rounded-lg  transition-colors">
+            Join
+          </button>
+        </a>
+      </div>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-white/80 backdrop-blur-md border-b">
+      <div class="flex flex-col px-6 py-4 gap-4">
+        <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+        <a href="/pages/matrial.html" class="text-gray-600 hover:text-blue-600 transition-colors">Materials</a>
+        <a href="/pages/descussion.html" class="text-gray-600 hover:text-blue-600 transition-colors">Discussion</a>
+        <a href="/pages/help.html" class="text-gray-600 hover:text-blue-600 transition-colors">Help</a>
+      </div>
+    </div>
+  </header>
+
+  <main role="main animate-entry">
+    <!-- Page Header -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-6">
+        <h1 class="text-3xl font-bold mb-1">Study Materials</h1>
+        <p class="text-gray-600">Browse notes, PDFs, tutorials, and more</p>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <!-- Filters -->
+    <section class="max-w-7xl mx-auto px-6 py-6">
+      <form action="/search" method="GET" class="flex flex-col md:flex-row gap-4 items-start md:items-center">
+        <input type="search" name="query" placeholder="Search materials..."
+          class="w-full md:w-64 px-4 py-2 border rounded-lg text-sm" />
+
+        <select name="category" class="w-full md:w-auto px-4 py-2 border rounded-lg text-sm text-gray-700">
+          <option value="">All Categories</option>
+          <option value="engineering">Engineering</option>
+          <option value="mathematics">Mathematics</option>
+          <option value="science">Science</option>
+          <option value="commerce">Commerce</option>
+        </select>
+
+        <select name="type" class="w-full md:w-auto px-4 py-2 border rounded-lg text-sm text-gray-700">
+          <option value="">All Types</option>
+          <option value="notes">Notes</option>
+          <option value="books">Books</option>
+          <option value="pdfs">PDFs</option>
+          <option value="videos">Videos</option>
+        </select>
+
+        <button type="submit"
+          class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
+          Search
+        </button>
+      </form>
+    </section>
+
+
+    <!-- Materials Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-8">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Material Card 1 -->
+        <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-blue-100 p-3 rounded-lg">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold mb-2">Advanced Calculus Notes</h3>
+              <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                <span>Engineering</span>
+                <span>•</span>
+                <span>15 pages</span>
+                <span>•</span>
+                <span>Updated 2 days ago</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm">
+                <span class="flex items-center gap-1 text-yellow-500">
+                  ★★★★☆ <span class="text-gray-500">(24)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between items-center text-sm border-t pt-4">
+            <span class="text-blue-600 font-medium">PDF • 1.2MB</span>
+            <div class="flex gap-3">
+              <button class="text-blue-600 hover:underline">Preview</button>
+              <button class="text-blue-600 hover:underline flex items-center gap-1">
+                Download
+                <span class="download-spinner hidden animate-spin">↻</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Material Card 2 -->
+        <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-green-100 p-3 rounded-lg">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+              </svg>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold mb-2">Physics: Motion & Laws</h3>
+              <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                <span>Science</span>
+                <span>•</span>
+                <span>10 pages</span>
+                <span>•</span>
+                <span>Updated 1 week ago</span>
+              </div>
+              <div class="flex items-center gap-2 text-sm">
+                <span class="flex items-center gap-1 text-yellow-500">
+                  ★★★★☆ <span class="text-gray-500">(18)</span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between items-center text-sm border-t pt-4">
+            <span class="text-blue-600 font-medium">PDF • 850KB</span>
+            <div class="flex gap-3">
+              <button class="text-blue-600 hover:underline">Preview</button>
+              <button class="text-blue-600 hover:underline">Download</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden col-span-full text-center py-12">
+          <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p class="text-gray-500 mb-4">No materials found matching your criteria</p>
+          <button class="text-blue-600 hover:underline">Clear filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pagination -->
+    <nav aria-label="Pagination" class="max-w-7xl mx-auto px-6 pb-16">
+      <div class="flex justify-center gap-2">
+        <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-100" aria-label="Previous page">
+          &larr; Prev
+        </button>
+        <button class="px-4 py-2 border rounded-lg text-sm" aria-current="page">1</button>
+        <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-100">2</button>
+        <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-100">3</button>
+        <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-100" aria-label="Next page">
+          Next &rarr;
+        </button>
+      </div>
+    </nav>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="text-xl font-bold mb-4">StudyHub</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          Empowering students worldwide with open-access educational resources and collaborative learning opportunities.
+        </p>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+          <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold mb-4">Resources</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="/contribute" class="hover:text-white transition-colors">Contribute</a></li>
+          <li><a href="/faq" class="hover:text-white transition-colors">FAQs</a></li>
+          <li><a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 mt-8 pt-8 border-t border-gray-700">
+      <p class="text-center text-gray-400 text-sm">&copy; 2024 StudyHub. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/app.js">
+
+  </script>
+</body>
+
+</html>

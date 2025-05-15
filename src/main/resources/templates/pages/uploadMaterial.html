@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <title>StudyHub | Upload Material</title>
+  <link rel="stylesheet" th:href="@{/css/output.css}" />
+  <style>
+    .upload-progress {
+      height: 6px;
+      border-radius: 3px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #3b82f6;
+      transition: width 0.3s ease;
+    }
+
+    .sticky-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-entry {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-scale:hover {
+      transform: translateY(-5px);
+    }
+  </style>
+
+</head>
+
+<body class=" bg-gray-50">
+  <!-- Fixed Header -->
+  <div class="sticky-header bg-white">
+    <header class=" bg-white" th:replace="~{fragments/header :: header}"></header>
+  </div>
+
+  <!-- Main Content -->
+  <main class="flex-grow ">
+    <div class="max-w-7xl mx-auto px-6 py-12 pt-24 min-h-[calc(100vh-160px)]">
+      <div class="upload-card bg-white p-8 rounded-2xl shadow-xl max-w-2xl mx-auto">
+        <div class="text-center mb-8">
+          <div class="inline-block bg-blue-100 p-4 rounded-full mb-4">
+            <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+          </div>
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">Share Your Knowledge</h1>
+          <p class="text-gray-600">Help others learn by uploading study materials</p>
+        </div>
+
+        <form action="#" method="POST" enctype="multipart/form-data" class="space-y-6">
+          <!-- Title -->
+          <div>
+            <label for="materialTitle" class="block text-sm font-medium text-gray-700 mb-2">Title</label>
+            <div class="relative">
+              <input type="text" id="materialTitle" name="title"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                placeholder="Effective title for your material" required aria-describedby="titleError">
+              <p id="titleError" class="text-red-500 text-sm mt-1 hidden">Please enter a valid title</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label for="materialDescription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <textarea id="materialDescription" name="description" rows="4"
+              class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+              placeholder="Add a detailed description (topics covered, key points, etc.)" required
+              aria-describedby="descError"></textarea>
+            <p id="descError" class="text-red-500 text-sm mt-1 hidden">Please enter a description</p>
+          </div>
+
+          <!-- File Upload -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Upload File</label>
+            <div
+              class="file-upload relative group cursor-pointer rounded-lg p-8 text-center border-2 border-dashed border-gray-300 hover:border-blue-500 transition-colors"
+              role="button" tabindex="0">
+              <input type="file" id="materialFile" name="file" accept=".pdf,.docx,.pptx,.txt"
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" required
+                aria-label="Select file to upload">
+              <div class="space-y-3">
+                <svg class="w-12 h-12 text-gray-400 mx-auto group-hover:text-blue-600 transition-colors" fill="none"
+                  stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <div>
+                  <p class="text-gray-600 group-hover:text-blue-600 transition-colors">
+                    <span class="font-medium">Click to upload</span> or drag and drop
+                  </p>
+                  <p class="text-xs text-gray-500 mt-1">PDF, DOCX, PPTX, TXT (Max 50MB)</p>
+                </div>
+              </div>
+            </div>
+            <div id="file-info" class="mt-3 text-sm text-gray-600 hidden"></div>
+            <div class="upload-progress mt-2 hidden">
+              <div class="progress-bar"></div>
+            </div>
+            <p id="fileError" class="text-red-500 text-sm mt-1 hidden">Please select a valid file</p>
+          </div>
+
+          <!-- Category Selection -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+              <select id="category" name="category"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                aria-label="Select category">
+                <option value="">Select Category</option>
+                <option>Engineering</option>
+                <option>Science</option>
+                <option>Mathematics</option>
+                <option>Business</option>
+              </select>
+            </div>
+            <div>
+              <label for="file-type" class="block text-sm font-medium text-gray-700 mb-2">File Type</label>
+              <select id="file-type" name="file-type"
+                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                aria-label="Select file type">
+                <option value="">Select File Type</option>
+                <option>Notes</option>
+                <option>Book</option>
+                <option>Presentation</option>
+                <option>Question Bank</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-6">
+            <button type="submit"
+              class="w-full bg-gradient-to-br from-blue-600 to-blue-500 text-white px-6 py-4 rounded-lg font-medium hover:from-blue-700 hover:to-blue-600 transition-all shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+              id="submitBtn">
+              Upload Material
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <div th:replace="~{fragments/footer :: footer}"></div>
+
+
+  <!-- Notification Toast -->
+  <div id="notification" class="fixed top-20 right-4 z-50 hidden p-4 rounded-lg bg-green-500 text-white shadow-xl">
+    File uploaded successfully!
+  </div>
+
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fileInput = document.getElementById('materialFile');
+      const fileInfo = document.getElementById('file-info');
+      const progressBar = document.querySelector('.progress-bar');
+      const uploadProgress = document.querySelector('.upload-progress');
+      const submitBtn = document.getElementById('submitBtn');
+      const notification = document.getElementById('notification');
+
+      // File upload handler
+      fileInput.addEventListener('change', function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          // Validate file size
+          if (file.size > 50 * 1024 * 1024) {
+            alert('File size exceeds 50MB limit');
+            this.value = '';
+            return;
+          }
+
+          fileInfo.classList.remove('hidden');
+          fileInfo.textContent = `Selected file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)`;
+          uploadProgress.classList.remove('hidden');
+          submitBtn.disabled = true;
+
+          // Simulate upload progress
+          let width = 0;
+          const interval = setInterval(() => {
+            width += 10;
+            progressBar.style.width = width + '%';
+            if (width >= 100) {
+              clearInterval(interval);
+              submitBtn.disabled = false;
+              showNotification();
+            }
+          }, 200);
+        }
+      });
+
+      // Form validation
+      document.querySelector('form').addEventListener('submit', (e) => {
+        let valid = true;
+        const title = document.getElementById('materialTitle');
+        const description = document.getElementById('materialDescription');
+
+        if (!title.value.trim()) {
+          document.getElementById('titleError').classList.remove('hidden');
+          valid = false;
+        }
+
+        if (!description.value.trim()) {
+          document.getElementById('descError').classList.remove('hidden');
+          valid = false;
+        }
+
+        if (!fileInput.files.length) {
+          document.getElementById('fileError').classList.remove('hidden');
+          valid = false;
+        }
+
+        if (!valid) e.preventDefault();
+      });
+
+      // Show notification
+      function showNotification() {
+        notification.classList.remove('hidden');
+        setTimeout(() => {
+          notification.classList.add('hidden');
+        }, 3000);
+      }
+
+      // Drag and drop handling
+      const dropZone = document.querySelector('.file-upload');
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-blue-500', 'bg-blue-50');
+      });
+
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change'));
+      });
+    });
+  </script>
+</body>
+<script th:src="@{/js/app.js}"></script>
+
+</html>
