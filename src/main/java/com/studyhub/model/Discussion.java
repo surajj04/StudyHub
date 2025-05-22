@@ -1,9 +1,10 @@
-package com.preportal.model;
+package com.studyhub.model;
 
-import com.preportal.service.RepliesConverter;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,8 +17,9 @@ public class Discussion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String topic;
+    @Column(columnDefinition = "TEXT")
     private String detail;
-    @Convert(converter = RepliesConverter.class)
+    @Type(JsonBinaryType.class)
     @Column(columnDefinition = "jsonb")
     private List<Replies> replies;
     private String postBy;

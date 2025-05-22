@@ -1,8 +1,8 @@
-package com.preportal.service;
+package com.studyhub.service;
 
-import com.preportal.model.User;
-import com.preportal.model.UserPrincipal;
-import com.preportal.repository.UserRepository;
+import com.studyhub.model.User;
+import com.studyhub.model.UserPrincipal;
+import com.studyhub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,17 +1,15 @@
-package com.preportal.service;
+package com.studyhub.service;
 
-import com.preportal.model.CustomUserDetails;
-import com.preportal.model.Discussion;
-import com.preportal.model.Replies;
-import com.preportal.repository.DiscussionRepository;
-import com.preportal.repository.UserRepository;
+import com.studyhub.model.CustomUserDetails;
+import com.studyhub.model.Discussion;
+import com.studyhub.model.Replies;
+import com.studyhub.repository.DiscussionRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DiscussionService {
@@ -46,10 +44,13 @@ public class DiscussionService {
             r.setDate(LocalDateTime.now());
 
             Discussion d = discussionRepository.findById(id).orElse(new Discussion());
+            List<Replies> replies = d.getReplies();
             if (d.getTopic() != null) {
-                List<Replies> list = d.getReplies();
-                list.add(r);
-                d.setReplies(list);
+                if (replies == null) {
+                    d.setReplies(new ArrayList<>());
+                }
+                replies.add(r);
+                d.setReplies(replies);
                 discussionRepository.save(d);
             }
         }

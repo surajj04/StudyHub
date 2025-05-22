@@ -1,6 +1,6 @@
-package com.preportal.repository;
+package com.studyhub.repository;
 
-import com.preportal.model.User;
+import com.studyhub.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

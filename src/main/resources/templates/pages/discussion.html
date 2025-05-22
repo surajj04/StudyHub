@@ -39,12 +39,15 @@
       <!-- Iterate through discussions -->
       <div th:each="discussion : ${session.discussions}"
         class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
+
         <div class="flex justify-between items-center mb-2">
           <h4 class="text-lg font-semibold text-gray-800" th:text="${discussion.topic}">Topic</h4>
           <span class="text-xs text-gray-400"
-            th:text="${discussion.replies != null ? #lists.size(discussion.replies) + ' replies' : '0 replies'}">3
-            replies</span>
+            th:text="${discussion.replies != null ? #lists.size(discussion.replies) + ' replies' : '0 replies'}">
+            0 replies
+          </span>
         </div>
+
         <p class="text-sm text-gray-600" th:text="${discussion.detail}">Details...</p>
 
         <div class="mt-3 text-sm text-gray-500 flex justify-between">
@@ -68,18 +71,20 @@
               placeholder="Write a reply..."></textarea>
             <button class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Submit Reply</button>
           </form>
-
         </div>
 
         <!-- Replies List -->
         <div class="replies hidden mt-4 space-y-3 border-t border-gray-300 pt-4">
           <div th:each="reply : ${discussion.replies}" class="bg-gray-100 p-3 rounded-lg text-sm text-gray-700">
-            <strong th:text="${reply.author + ':'}">User:</strong>
-            <span th:text="${reply.content}">Reply text</span>
+            <strong th:text="${reply.name + ':'}">User:</strong>
+            <span th:text="${reply.reply}">Reply text</span>
+            <div class="text-xs text-gray-400" th:text="${#temporals.format(reply.date, 'MMM dd, yyyy HH:mm')}">Date
+            </div>
           </div>
         </div>
       </div>
     </div>
+
 
   </main>
 

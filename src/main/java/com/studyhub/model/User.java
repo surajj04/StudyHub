@@ -1,4 +1,4 @@
-package com.preportal.model;
+package com.studyhub.model;
 
 
 import jakarta.persistence.*;

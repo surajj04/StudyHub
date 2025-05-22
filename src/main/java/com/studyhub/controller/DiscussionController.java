@@ -1,7 +1,7 @@
-package com.preportal.controller;
+package com.studyhub.controller;
 
-import com.preportal.model.Discussion;
-import com.preportal.service.DiscussionService;
+import com.studyhub.model.Discussion;
+import com.studyhub.service.DiscussionService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +39,10 @@ public class DiscussionController {
     @RequestMapping("/discussion/reply")
     public String addReply(@RequestParam String reply,@RequestParam int id, HttpSession session) {
         discussionService.addReply(reply,id, session);
-        return "/pages/discussion";
+        session.setAttribute("redirectUrl", "/discussion");
+        session.setAttribute("error", null);
+        session.setAttribute("success", "Your reply has been posted successfully!");
+        return "/pages/message";
     }
 
 

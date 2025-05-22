@@ -1,16 +1,13 @@
-package com.preportal.controller;
+package com.studyhub.controller;
 
-import com.preportal.model.CustomUserDetails;
-import com.preportal.model.User;
-import com.preportal.model.UserPrincipal;
-import com.preportal.service.UserService;
+import com.studyhub.model.*;
+import com.studyhub.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
@@ -18,6 +15,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    @GetMapping("/profile")
+    public String profile(HttpSession session) {
+        session.setAttribute("userMaterial", userService.userMaterial(session));
+        return "/pages/profile";
+    }
 
     @PostMapping("/register")
     public String register(@RequestParam String confirm, @ModelAttribute User user, HttpSession session) {
@@ -39,7 +42,6 @@ public class UserController {
         session.setAttribute("error", "Something went wrong!!! Please try again later.");
         return "/pages/message";
     }
-
 
 
     @GetMapping("/login-success")
@@ -64,6 +66,13 @@ public class UserController {
         session.setAttribute("error", "Invalid username or password.");
         return "pages/message";
     }
+
+    @GetMapping("/profile-search")
+    public String materialSearch(@ModelAttribute Search search, HttpSession session) {
+        session.setAttribute("userMaterial", userService.searchUserMaterials(search, session));
+        return "pages/profile";
+    }
+
 
 
 

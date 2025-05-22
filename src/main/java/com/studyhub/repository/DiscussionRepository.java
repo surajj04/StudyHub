@@ -1,6 +1,6 @@
-package com.preportal.repository;
+package com.studyhub.repository;
 
-import com.preportal.model.Discussion;
+import com.studyhub.model.Discussion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
