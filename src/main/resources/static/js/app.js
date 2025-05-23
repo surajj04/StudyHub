@@ -1,7 +1,33 @@
-const menuToggle = document.getElementById('menu-toggle')
-const mobileMenu = document.getElementById('mobile-menu')
-menuToggle.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden')
+// const menuToggle = document.getElementById('menu-toggle')
+// const mobileMenu = document.getElementById('mobile-menu')
+// menuToggle.addEventListener('click', () => {
+//   mobileMenu.classList.toggle('hidden')
+// })
+
+// Wrap all JavaScript code in DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile Menu Toggle - Single initialization
+  const menuToggle = document.getElementById('menu-toggle')
+  const mobileMenu = document.getElementById('mobile-menu')
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden')
+
+      // Optional: Add animation class
+      mobileMenu.classList.toggle('animate-slide-down')
+
+      // Optional: Close menu when clicking outside
+      document.addEventListener('click', e => {
+        if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+          mobileMenu.classList.add('hidden')
+        }
+      })
+    })
+  }
+
+  // Remove duplicate mobile menu toggle code from other sections
+  // ... rest of your existing JavaScript code ...
 })
 
 // Profile JS:
@@ -75,10 +101,6 @@ editProfileModal.addEventListener('click', e => {
     document.body.style.overflow = 'auto'
   }
 })
-
-// Mobile menu toggle
-// const menuToggle = document.getElementById('menu-toggle')
-// const mobileMenu = document.getElementById('mobile-menu')
 
 menuToggle.addEventListener('click', () => {
   mobileMenu.classList.toggle('hidden')
@@ -158,11 +180,6 @@ function toggleReplies (button) {
     ? 'Show Replies'
     : 'Hide Replies'
 }
-
-// Mobile menu toggle
-document.getElementById('menu-toggle').addEventListener('click', () => {
-  document.getElementById('mobile-menu').classList.toggle('hidden')
-})
 
 // Help JS
 
@@ -408,10 +425,4 @@ dropZone.addEventListener('drop', e => {
   const files = e.dataTransfer.files
   fileInput.files = files
   fileInput.dispatchEvent(new Event('change'))
-})
-
-// Mobile menu toggle
-document.getElementById('menu-toggle').addEventListener('click', function () {
-  const menu = document.getElementById('mobile-menu')
-  menu.classList.toggle('hidden')
 })
