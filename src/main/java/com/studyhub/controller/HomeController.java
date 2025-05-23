@@ -22,13 +22,13 @@ public class HomeController {
 
     @GetMapping("/upload-material")
     public String uploadMaterial() {
-        return "/pages/uploadMaterial";
+        return "pages/uploadMaterial";
     }
 
     @GetMapping("/login")
     public String join(HttpSession session) {
         session.removeAttribute("role");
-        return "/pages/login";
+        return "pages/login";
     }
 
 }

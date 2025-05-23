@@ -17,7 +17,7 @@ public class DiscussionController {
     @GetMapping("/discussion")
     public String discussion(HttpSession session) {
         session.setAttribute("discussions", discussionService.getAllDiscussions());
-        return "/pages/discussion";
+        return "pages/discussion";
     }
 
 
@@ -28,12 +28,12 @@ public class DiscussionController {
             session.setAttribute("redirectUrl", "/discussion");
             session.setAttribute("error", null);
             session.setAttribute("success", "Your discussion question has been posted successfully!");
-            return "/pages/message";
+            return "pages/message";
         }
         session.setAttribute("success", null);
         session.setAttribute("redirectUrl", "/discussion");
         session.setAttribute("error", "Something went wrong while saving your discussion. Please try again.");
-        return "/pages/message";
+        return "pages/message";
     }
 
     @RequestMapping("/discussion/reply")
@@ -42,7 +42,7 @@ public class DiscussionController {
         session.setAttribute("redirectUrl", "/discussion");
         session.setAttribute("error", null);
         session.setAttribute("success", "Your reply has been posted successfully!");
-        return "/pages/message";
+        return "pages/message";
     }
 
 

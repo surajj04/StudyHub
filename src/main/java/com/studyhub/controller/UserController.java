@@ -19,7 +19,7 @@ public class UserController {
     @GetMapping("/profile")
     public String profile(HttpSession session) {
         session.setAttribute("userMaterial", userService.userMaterial(session));
-        return "/pages/profile";
+        return "pages/profile";
     }
 
     @PostMapping("/register")
@@ -28,19 +28,19 @@ public class UserController {
             session.setAttribute("success", null);
             session.setAttribute("redirectUrl", "/join");
             session.setAttribute("error", "Passwords do not match!");
-            return "/pages/message";
+            return "pages/message";
         }
         User result = userService.registerUser(user);
         if (result != null) {
             session.setAttribute("redirectUrl", "/join");
             session.setAttribute("error", null);
             session.setAttribute("success", "Register successful!");
-            return "/pages/message";
+            return "pages/message";
         }
         session.setAttribute("success", null);
         session.setAttribute("redirectUrl", "/");
         session.setAttribute("error", "Something went wrong!!! Please try again later.");
-        return "/pages/message";
+        return "pages/message";
     }
 
 
