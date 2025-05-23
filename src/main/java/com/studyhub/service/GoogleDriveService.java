@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,15 +20,7 @@ import java.util.List;
 @Service
 public class GoogleDriveService {
 
-
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
-    private static final String SERVICE_ACCOUNT_KEY_PATH = getPathToGoogleCredentials();
-
-    private static String getPathToGoogleCredentials() {
-        String currentDirectory = System.getProperty("user.dir");
-        Path filePath = Paths.get(currentDirectory, "cred.json");
-        return filePath.toString();
-    }
 
     public List<String> uploadFile(File file) {
         try {
@@ -69,7 +60,12 @@ public class GoogleDriveService {
     }
 
     private Drive createDriveService() throws IOException, GeneralSecurityException {
-        GoogleCredential credentials = GoogleCredential.fromStream(new FileInputStream(SERVICE_ACCOUNT_KEY_PATH))
+        String credentialsJson = System.getenv("GOOGLE_CREDENTIALS");
+        if (credentialsJson == null) {
+            throw new IOException("GOOGLE_CREDENTIALS environment variable not set");
+        }
+        InputStream credentialsStream = new ByteArrayInputStream(credentialsJson.getBytes());
+        GoogleCredential credentials = GoogleCredential.fromStream(credentialsStream)
                 .createScoped(Collections.singleton(DriveScopes.DRIVE));
         return new Drive.Builder(
                 GoogleNetHttpTransport.newTrustedTransport(),
@@ -81,6 +77,4 @@ public class GoogleDriveService {
         Drive drive = createDriveService();
         drive.files().delete(fileId).execute();
     }
-
-
 }
