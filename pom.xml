@@ -8,8 +8,8 @@
         <version>3.4.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.preportal</groupId>
-    <artifactId>PrePortal</artifactId>
+    <groupId>com.studyhub</groupId>
+    <artifactId>StudyHub</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>PrePortal</name>
     <description>it is the study material web app for students</description>
