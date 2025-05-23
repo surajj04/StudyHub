@@ -1,12 +1,12 @@
-# === Stage 1: Build ===
-FROM gradle:7.6.4-jdk21 AS builder
+# === Stage 1: Build the application using Maven ===
+FROM maven:3.9.6-eclipse-temurin-21 AS builder
 WORKDIR /app
 COPY . .
-RUN gradle clean build --no-daemon
+RUN mvn clean package -DskipTests
 
-# === Stage 2: Run ===
+# === Stage 2: Create the runtime image ===
 FROM openjdk:21-slim
 WORKDIR /app
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
