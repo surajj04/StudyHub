@@ -38,10 +38,10 @@ public class MaterialController {
                 session.setAttribute("error", "File is empty.");
                 return "/pages/message";
             }
-            Material resp = googleDriveService.uploadMaterial(materialUpload, session);
+            Material resp = materialService.uploadMaterialDrive(materialUpload, session);
 
             if (resp != null) {
-                session.setAttribute("redirectUrl", "/upload-material");
+                session.setAttribute("redirectUrl", "/profile");
                 session.setAttribute("error", null);
                 session.setAttribute("success", "Your study material has been uploaded successfully!");
                 return "/pages/message";
@@ -95,7 +95,12 @@ public class MaterialController {
 
     }
 
-    @PostMapping("/deleteMaterial/{id}")
+    @GetMapping("/delete-material/{id}")
+    public String showDeleteMaterial(@PathVariable int id,HttpSession session) {
+        session.setAttribute("deleteMaterial", materialService.getMaterialById(id));
+        return "/pages/deleteMaterial";
+    }
+    @PostMapping("/delete-material/{id}")
     public String deleteMaterial(@PathVariable("id") int id, HttpSession session) {
         Material result = materialService.deleteMaterial(id, session);
         if (result != null) {

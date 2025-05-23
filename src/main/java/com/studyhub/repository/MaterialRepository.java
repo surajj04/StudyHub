@@ -14,4 +14,8 @@ public interface MaterialRepository extends JpaRepository<Material, Integer>, Jp
 
     List<Material> findByUserID(int userID);
 
+    List<Material> findTop2ByOrderByIdDesc();
+
+
+
 }

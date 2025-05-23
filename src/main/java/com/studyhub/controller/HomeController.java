@@ -12,8 +12,9 @@ public class HomeController {
     @Autowired
     private MaterialService materialService;
 
-    @GetMapping("/home")
-    public String home() {
+    @GetMapping("/")
+    public String home(HttpSession session) {
+        session.setAttribute("latestMaterial", materialService.getLatestMaterial());
         return "index";
     }
 

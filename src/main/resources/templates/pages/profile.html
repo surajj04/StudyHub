@@ -207,11 +207,14 @@
                     </a>
 
                     <!-- Delete Button -->
-                    <button onclick="openModal('deleteModal1')"
-                      class="bg-white/90 backdrop-blur-sm p-2 rounded-full text-red-600 hover:bg-white shadow-md hover:scale-105 transition-transform"
-                      title="Delete">
-                      <i class="fas fa-trash text-sm w-4 h-4 flex items-center justify-center"></i>
-                    </button>
+                    <a th:href="@{/delete-material/{id}(id=${material.id})}">
+                      <button type="button"
+                        class="bg-white/90 backdrop-blur-sm p-2 rounded-full text-red-600 hover:bg-white shadow-md hover:scale-105 transition-transform"
+                        title="Delete">
+                        <i class="fas fa-trash text-sm w-4 h-4 flex items-center justify-center"></i>
+                      </button>
+                    </a>
+
                   </div>
                 </div>
 
@@ -501,22 +504,6 @@
   </div>
 
 
-  <!-- Delete Modal -->
-  <div id="deleteModal1" class="fixed inset-0 z-50 hidden bg-black bg-opacity-40 flex items-center justify-center">
-    <div class="bg-white rounded-lg w-full max-w-sm p-6">
-      <h2 class="text-lg font-semibold mb-4">Confirm Delete</h2>
-      <p class="text-gray-700 mb-4">Are you sure you want to delete "<strong>Data Structures & Algorithms
-          Notes</strong>"?</p>
-      <form th:action="@{/deleteMaterial/}" method="POST">
-        <div class="flex justify-end gap-2">
-          <button type="button" onclick="closeModal('deleteModal1')"
-            class="px-4 py-2 bg-gray-200 rounded">Cancel</button>
-          <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
 
   <div id="logoutModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 overflow-y-auto">
     <div class="relative min-h-screen flex items-center justify-center p-4">
@@ -611,6 +598,97 @@
     }
   });
 
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const fileInput = document.getElementById('materialFile');
+    const fileInfo = document.getElementById('file-info');
+    const progressBar = document.querySelector('.progress-bar');
+    const uploadProgress = document.querySelector('.upload-progress');
+    const submitBtn = document.getElementById('submitBtn');
+    const notification = document.getElementById('notification');
+
+    // File upload handler
+    fileInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        // Validate file size
+        if (file.size > 50 * 1024 * 1024) {
+          alert('File size exceeds 50MB limit');
+          this.value = '';
+          return;
+        }
+
+        fileInfo.classList.remove('hidden');
+        fileInfo.textContent = `Selected file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)}MB)`;
+        uploadProgress.classList.remove('hidden');
+        submitBtn.disabled = true;
+
+        // Simulate upload progress
+        let width = 0;
+        const interval = setInterval(() => {
+          width += 10;
+          progressBar.style.width = width + '%';
+          if (width >= 100) {
+            clearInterval(interval);
+            submitBtn.disabled = false;
+            showNotification();
+          }
+        }, 200);
+      }
+    });
+
+    // Form validation
+    document.querySelector('form').addEventListener('submit', (e) => {
+      let valid = true;
+      const title = document.getElementById('materialTitle');
+      const description = document.getElementById('materialDescription');
+
+      if (!title.value.trim()) {
+        document.getElementById('titleError').classList.remove('hidden');
+        valid = false;
+      }
+
+      if (!description.value.trim()) {
+        document.getElementById('descError').classList.remove('hidden');
+        valid = false;
+      }
+
+      if (!fileInput.files.length) {
+        document.getElementById('fileError').classList.remove('hidden');
+        valid = false;
+      }
+
+      if (!valid) e.preventDefault();
+    });
+
+    // Show notification
+    function showNotification() {
+      notification.classList.remove('hidden');
+      setTimeout(() => {
+        notification.classList.add('hidden');
+      }, 3000);
+    }
+
+    // Drag and drop handling
+    const dropZone = document.querySelector('.file-upload');
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('border-blue-500', 'bg-blue-50');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('border-blue-500', 'bg-blue-50');
+      fileInput.files = e.dataTransfer.files;
+      fileInput.dispatchEvent(new Event('change'));
+    });
+  });
+
 </script>
+
 
 </html>

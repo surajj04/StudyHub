@@ -6,12 +6,16 @@ import com.studyhub.model.MaterialUpload;
 import com.studyhub.model.Search;
 import com.studyhub.repository.MaterialRepository;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,9 +24,22 @@ public class MaterialService {
 
     @Autowired
     private MaterialRepository materialRepository;
+    @Autowired
+    private GoogleDriveService googleDriveService;
 
+    public Material uploadMaterialDrive(MaterialUpload materialUpload, HttpSession session) throws IOException {
+        File tempFile = File.createTempFile("upload-", materialUpload.getFile().getOriginalFilename());
+        materialUpload.getFile().transferTo(tempFile);
+        List<String> list = googleDriveService.uploadFile(tempFile);
+        assert list != null;
+        if (list.getFirst() != null) {
+            CustomUserDetails user = (CustomUserDetails) session.getAttribute("currentUser");
+            return saveMaterial(materialUpload, list, user);
+        }
+        return null;
+    }
 
-    public Material uploadMaterial(MaterialUpload materialUpload, List<String> list, CustomUserDetails user) {
+    public Material saveMaterial(MaterialUpload materialUpload, List<String> list, CustomUserDetails user) {
         Material material = new Material();
         material.setTitle(materialUpload.getTitle());
         material.setDescription(materialUpload.getDescription());
@@ -91,13 +108,24 @@ public class MaterialService {
         return null;
     }
 
-    public Material deleteMaterial(int id,HttpSession session) {
-        Material m = getMaterialById(id);
-        CustomUserDetails user = (CustomUserDetails) session.getAttribute("currentUser");
-        if (m.getUserID() == user.getId()) {
-            materialRepository.delete(m);
+    public Material deleteMaterial(int id, HttpSession session) {
+        try {
+            Material m = getMaterialById(id);
+            CustomUserDetails user = (CustomUserDetails) session.getAttribute("currentUser");
+            if (m.getUserID() == user.getId()) {
+                googleDriveService.deleteFile(m.getDownloadUrl().substring(47));
+                materialRepository.delete(m);
+                return m;
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Material> getLatestMaterial() {
+        return materialRepository.findTop2ByOrderByIdDesc();
     }
 
 }

@@ -49,14 +49,12 @@
 
           <!-- Responsive Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 sm:justify-start items-center">
-            <button
-              class="bg-white text-blue-600 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-opacity-90 transition-all w-full sm:w-auto">
-              Start Learning Now →
-            </button>
-            <button
-              class="border-2 border-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg hover:bg-white hover:text-blue-600 transition-all w-full sm:w-auto">
-              How It Works
-            </button>
+            <a href="/study-material">
+              <button
+                class="bg-white text-blue-600 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold hover:bg-opacity-90 transition-all w-full sm:w-auto">
+                Start Learning Now →
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -94,83 +92,75 @@
 
   <!-- Featured Resources -->
   <section class="animate-entry max-w-7xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold text-gray-800 mb-12">Featured Study Materials</h2>
+    <h2 class="text-3xl font-bold text-gray-800 mb-12">Key Features</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <!-- Mathematics Card -->
+
+      <!-- Study Material Upload Card -->
       <div class="bg-white hover-scale rounded-xl shadow-lg overflow-hidden">
         <div class="p-6">
           <div class="flex items-center gap-4 mb-4">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              📘
+            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center text-xl">
+              📚
             </div>
-            <h3 class="text-xl font-semibold">Mathematics Mastery</h3>
+            <h3 class="text-xl font-semibold">Upload Study Material</h3>
           </div>
-          <p class="text-gray-600 mb-4">Comprehensive guides from algebra to calculus</p>
+          <p class="text-gray-600 mb-4">Contribute resources by uploading notes, books, past papers, lab manuals, and
+            more with categorized tags.</p>
           <div class="flex items-center justify-between">
-            <button class="text-blue-600 hover:text-blue-700 flex items-center gap-2">
-              Download Now
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM13.293 8.707a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L14 11.414V16a1 1 0 11-2 0v-4.586l-1.293 1.293a1 1 0 01-1.414-1.414l3-3z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-            <span class="text-sm text-gray-500">PDF • 2.4MB</span>
+            <a href="/upload" class="text-yellow-600 hover:text-yellow-700 flex items-center gap-2">
+              Upload Now →
+            </a>
+            <span class="text-sm text-gray-500">1.5k+ Files Shared</span>
           </div>
         </div>
       </div>
 
-      <!-- Physics Card -->
+      <!-- Browse by Category & Type Card -->
       <div class="bg-white hover-scale rounded-xl shadow-lg overflow-hidden">
         <div class="p-6">
           <div class="flex items-center gap-4 mb-4">
-            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-              🔭
+            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-xl">
+              🗂️
             </div>
-            <h3 class="text-xl font-semibold">Physics Essentials</h3>
+            <h3 class="text-xl font-semibold">Browse Resources</h3>
           </div>
-          <p class="text-gray-600 mb-4">Master classical mechanics and thermodynamics</p>
+          <p class="text-gray-600 mb-4">Filter by category (e.g., Engineering, Commerce) and type (e.g., Notes, Lab
+            Manual) to quickly find what you need.</p>
           <div class="flex items-center justify-between">
-            <button class="text-red-600 hover:text-red-700 flex items-center gap-2">
-              Watch Videos
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-            <span class="text-sm text-gray-500">15 Videos</span>
+            <a href="/materials" class="text-blue-600 hover:text-blue-700 flex items-center gap-2">
+              Explore Resources →
+            </a>
+            <span class="text-sm text-gray-500">20+ Categories</span>
           </div>
         </div>
       </div>
 
-      <!-- Programming Card -->
+      <!-- Academic Discussion Forum Card -->
       <div class="bg-white hover-scale rounded-xl shadow-lg overflow-hidden">
         <div class="p-6">
           <div class="flex items-center gap-4 mb-4">
-            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-              💻
+            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-xl">
+              💬
             </div>
-            <h3 class="text-xl font-semibold">Programming Basics</h3>
+            <h3 class="text-xl font-semibold">Discussion Forums</h3>
           </div>
-          <p class="text-gray-600 mb-4">Learn Python fundamentals and algorithms</p>
+          <p class="text-gray-600 mb-4">Ask questions, help others, or start discussions about difficult topics and
+            exams with fellow students.</p>
           <div class="flex items-center justify-between">
-            <button class="text-green-600 hover:text-green-700 flex items-center gap-2">
-              Get eBook
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd"
-                  d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
-                  clip-rule="evenodd" />
-              </svg>
-            </button>
-            <span class="text-sm text-gray-500">ePub • 5.1MB</span>
+            <a href="/forum" class="text-green-600 hover:text-green-700 flex items-center gap-2">
+              Join Discussion →
+            </a>
+            <span class="text-sm text-gray-500">500+ Threads</span>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
-  <div class="bg-gray-50 p-8 min-h-[350px] flex items-center justify-center">
+
+
+  <!-- <div class="bg-gray-50 p-8 min-h-[350px] flex items-center justify-center">
     <div
       class="bg-white [box-shadow:0_4px_24px_-8px_rgba(0,0,0,0.2)] grid lg:grid-cols-4 sm:grid-cols-2 sm:gap-24 gap-12 rounded-3xl px-20 py-10">
 
@@ -199,84 +189,41 @@
       </div>
 
     </div>
-  </div>
-
-
+  </div> -->
 
 
   <!-- Latest Uploads -->
   <section class="max-w-7xl mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold text-gray-800 mb-12">Latest Uploads</h2>
     <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
+
+      <div th:each="material : ${session.latestMaterial}" class="bg-white p-6 rounded-xl shadow-md hover-scale">
         <div class="flex items-center gap-4 mb-4">
-          <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-            🧪
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-lg">
+            <span
+              th:text="${material.category.equals('Economics') ? '📊' : material.category.equals('Computer Science') ? '💻' : '📁'}"></span>
           </div>
           <div>
-            <h3 class="text-xl font-semibold">Advanced Chemistry</h3>
-            <p class="text-sm text-gray-500">Uploaded 2 hours ago</p>
+            <h3 class="text-xl font-semibold" th:text="${material.title}">Material Title</h3>
+            <p class="text-sm text-gray-500" th:text="'Uploaded by ' + ${material.userName}">Uploaded Info</p>
           </div>
         </div>
-        <p class="text-gray-600 mb-4">Complete guide to organic chemistry reactions and mechanisms</p>
-        <button class="text-yellow-600 hover:text-yellow-700 flex items-center gap-2">
-          View Material →
-        </button>
+        <p class="text-gray-600 mb-4" th:text="${material.description}">Material Description</p>
+
+        <div class="flex gap-4">
+          <a th:href="${material.viewUrl}" target="_blank"
+            class="text-blue-600 hover:text-blue-700 flex items-center gap-2">
+            View Material →
+          </a>
+          <a th:href="${material.downloadUrl}" class="text-green-600 hover:text-green-700 flex items-center gap-2">
+            Download
+          </a>
+        </div>
       </div>
 
-      <div class="bg-white p-6 rounded-xl shadow-md hover-scale">
-        <div class="flex items-center gap-4 mb-4">
-          <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center">
-            📜
-          </div>
-          <div>
-            <h3 class="text-xl font-semibold">World History</h3>
-            <p class="text-sm text-gray-500">Uploaded 5 hours ago</p>
-          </div>
-        </div>
-        <p class="text-gray-600 mb-4">Comprehensive timeline of major historical events</p>
-        <button class="text-pink-600 hover:text-pink-700 flex items-center gap-2">
-          View Material →
-        </button>
-      </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="max-w-7xl mx-auto px-6 py-16">
-    <h2 class="text-3xl font-bold text-gray-800 mb-12">What Students Say</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white p-8 rounded-xl shadow-md hover-scale">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-14 h-14 rounded-full"
-            alt="Sarah Johnson">
-          <div>
-            <div class="font-semibold">Sarah Johnson</div>
-            <div class="text-sm text-gray-500">Computer Science Student</div>
-          </div>
-        </div>
-        <p class="text-gray-600">This platform transformed how I study. The quality of resources helped me ace my exams!
-        </p>
-        <div class="mt-4 flex gap-1 text-yellow-400">
-          ★★★★★
-        </div>
-      </div>
-
-      <div class="bg-white p-8 rounded-xl shadow-md hover-scale">
-        <div class="flex items-center gap-4 mb-4">
-          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-14 h-14 rounded-full" alt="Mike Chen">
-          <div>
-            <div class="font-semibold">Mike Chen</div>
-            <div class="text-sm text-gray-500">Engineering Student</div>
-          </div>
-        </div>
-        <p class="text-gray-600">The best collection of study materials I've found online. Highly recommended!</p>
-        <div class="mt-4 flex gap-1 text-yellow-400">
-          ★★★★★
-        </div>
-      </div>
-    </div>
-  </section>
 
   <div th:replace="~{fragments/footer :: footer}"></div>
 
