@@ -18,18 +18,22 @@
             <a th:if="${session.currentUser != null}" href="/profile"
                 class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
         </div>
-
-        <div class="flex items-center">
+        <div class="flex items-center gap-4">
+            <!-- Mobile Menu Toggle -->
             <button class="md:hidden p-2 hover:bg-gray-100 rounded-lg" id="menu-toggle" aria-label="Toggle Menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
 
-            <a th:if="${session.currentUser == null}" class="ml-4 bg-gray-600 rounded-2xl text-white" href="/login">
-                <button class="px-5 py-2 rounded-lg transition-colors">
-                    Join
-                </button>
+            <!-- Desktop Auth Button -->
+            <a th:if="${session.currentUser == null}" href="/login"
+                class="hidden md:flex items-center gap-2 px-4 py-2  text-gray-800 rounded-lg transition-colors border border-gray-200 hover:bg-gray-100">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                <span>Login</span>
             </a>
         </div>
     </nav>
@@ -46,7 +50,14 @@
             <a th:if="${session.currentUser != null}" href="/profile"
                 class="text-gray-600 hover:text-blue-600 transition-colors">Profile</a>
             <a th:if="${session.currentUser == null}" href="/login"
-                class="text-gray-600 hover:text-blue-600 transition-colors">Join</a>
+                class="flex items-center text-sm text-gray-600 rounded-md transition-colors hover:bg-gray-100 block md:hidden">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+                <span>Login</span>
+            </a>
+
         </div>
     </div>
 </header>
