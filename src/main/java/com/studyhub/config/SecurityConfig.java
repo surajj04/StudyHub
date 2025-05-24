@@ -24,7 +24,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/", "/login", "/register", "/discussion", "/help", "/study-material", "/search", "/css/**", "/js/**", "/webjars/**").permitAll().anyRequest().authenticated())
-                .rememberMe(remember -> remember.key("uniqueAndSecret").tokenValiditySeconds(86400))
+                .rememberMe(remember -> remember.key("uniqueAndSecret").tokenValiditySeconds(7 * 24 * 60 * 60))
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
